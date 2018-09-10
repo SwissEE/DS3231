@@ -1,0 +1,95 @@
+	Start a new rtc with "RTC rtc;"
+
+	TIME FUNCTIONS
+
+	rtc.seconds() -> returns current second (0-59)
+	
+	rtc.minutes() -> current minute (0-59)
+	
+	rtc.hours() -> returns current hour (0-23)
+	
+	rtc.weekdays() -> returns current weekday (1-7)
+	
+	rtc.days() -> returns current day of month (1-31)
+	
+	rtc.months() -> returns current month (1-12)
+	
+	rtc.years() -> returns current year (0-99)
+	
+	rtc.temp() -> returns temperature 
+	
+	rtc.setdate(byte second, byte minute, byte hour, byte dayofweek, byte day, byte month, byte year) ->setting the time of the DS3231
+
+	
+	
+	ALARM FUNCTIONS
+
+	Set time and mode of Alarm 1
+	bool mode [5] = {A1M4, A1M3, A1M2, A1M1, DY/DT}
+	rtc.setA1(byte second, byte minute, byte hour, byte dayofweek, byte day, bool mode[])
+	DY/DT A1M4 A1M3 A1M2 A1M1 Alarmrate
+	 X     1    1    1    1   Alarm once per second
+	 X     1    1    1    0   Alarm when seconds match
+	 X     1    1    0    0   Alarm when minutes and seconds match
+	 X     1    0    0    0   Alarm when hours, minutes, and seconds match
+	 0     0    0    0    0   Alarm when date, hours, minutes, and seconds match
+	 1     0    0    0    0   Alarm when day, hours, minutes, and seconds match
+	
+	Set time and mode of Alarm 2
+	bool mode [4] = {A2M4, A2M3, A2M2, DY/DT}
+	rtc.setA2(byte minute, byte hour, byte dayofweek, byte day, bool mode[])
+	DY/DT A2M4 A2M3 A2M2 Alarmrate
+	  X    1    1    1   Alarm once per minute(00 seconds of every minute)
+	  X    1    1    0   Alarm when minutes match
+	  X    1    0    0   Alarm when hours and minutes match
+	  0    0    0    0   Alarm when date, hours, and minutes match
+	  1    0    0    0   Alarm when day, hours, and minutes match
+	
+	
+	
+	
+	rtc.isA1() -> returns true if A1 flag (A1F) is set to 1
+	
+	rtc.isA2() -> returns true if A2 flag (A2F) is set to 1
+
+	
+	rtc.resetA1() -> write A1F bit to 0
+	
+	rtc.resetA2() -> write A2F bit to 0
+
+	
+	rtc.disableA1() -> disables Alarm1 Interrupt (set A1IE to 0)
+	
+	rtc.disableA2() -> disables Alarm2 Interrupt (set A2IE to 0)
+	
+	disables the Alarm Interrupt Capability
+	Ouputs Squarewave on the INT/SQW Pin
+	rtc. setSQW(int RS1, int RS2)
+	RS2 RS1   SQW OUTPUTFREQUENCY
+	 0   0		1Hz
+	 0   1		1.024kHz
+	 1   0		4.096kHz
+	 1   1		8.192kHz				
+	
+
+	REGISTERS
+	ADDRESS		BIT 7		BIT	6		BIT 5		BIT 4	 BIT 3	 BIT 2	 BIT 1	 BIT 0	 FUNCTION RANGE
+		00h			0		|			10 Seconds		    |			Seconds           |    Seconds 00–59
+		01h			0		|			10 Minutes		    |			Minutes			  |    Minutes 00–59
+		02h			0		12/24	  AM/PM/20 Hour|10 Hour|Hour						  |    Hours   01–12/00–23
+		03h			0		0				0		 0			0	|		Day			  |	   Day     01–7
+		04h			0		0			|	10 Date		    |				Date          |    Date    01–31
+		05h	   Century		0				0      10 Month |				Month         |    Month   01-12 +Century
+		06h   |    			10 Year						    |				Year		  |    Year    00–99
+		07h		A1M1		|			10 Seconds			|				Seconds		  |    Alarm 1 Seconds 00–59
+		08h		A1M2		|			10 Minutes			|				Minutes		  |	   Alarm 1 Minutes 00–59
+		09h		A1M3		12/24	   AM/PM/20 Hour|10 Hour|			    Hour		  |	   Alarm 1 Hours 1–12 + AM/PM 00–23
+		0Ah		A1M4		DY/DT		|	10 Date			|				Day			  |    Alarm 1 Day 1–7 /Date 1–31
+		0Bh		A2M2		|      10 Minutes				|				Minutes		  |	   Alarm 2 Minutes 00–59
+		0Ch		A2M3		12/24	   AM/PM/20 Hour|10 Hour|				Hour		  |	   Alarm 2 Hours 1–12 + AM/PM 00–23
+		0Dh		A2M4		DY/DT		|	10 Date			|				Day			  |    Alarm 2 Day 1–7/Date 1–31
+		0Eh		EOSC		BBSQW		CONV		RS2			RS1		INTCN	A2IE	A1IE   Controlregister
+		0Fh		OSF			0			0			0		EN32kHz		BSY		A2F		A1F	   Control/Status —
+		10h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA   Aging Offset —
+		11h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA   MSB of Temp —
+		12h		DATA		DATA		0			0			0		0		0		0	   LSB of Temp —
