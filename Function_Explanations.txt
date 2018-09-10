@@ -72,24 +72,24 @@
 	 1   1		8.192kHz				
 	
 
-	REGISTERS
-	ADDRESS		BIT 7		BIT	6		BIT 5		BIT 4	 BIT 3	 BIT 2	 BIT 1	 BIT 0	 FUNCTION RANGE
-		00h			0		|			10 Seconds		    |			Seconds           |    Seconds 00–59
-		01h			0		|			10 Minutes		    |			Minutes			  |    Minutes 00–59
-		02h			0		12/24	  AM/PM/20 Hour|10 Hour|Hour						  |    Hours   01–12/00–23
-		03h			0		0				0		 0			0	|		Day			  |	   Day     01–7
-		04h			0		0			|	10 Date		    |				Date          |    Date    01–31
-		05h	   Century		0				0      10 Month |				Month         |    Month   01-12 +Century
-		06h   |    			10 Year						    |				Year		  |    Year    00–99
-		07h		A1M1		|			10 Seconds			|				Seconds		  |    Alarm 1 Seconds 00–59
-		08h		A1M2		|			10 Minutes			|				Minutes		  |	   Alarm 1 Minutes 00–59
-		09h		A1M3		12/24	   AM/PM/20 Hour|10 Hour|			    Hour		  |	   Alarm 1 Hours 1–12 + AM/PM 00–23
-		0Ah		A1M4		DY/DT		|	10 Date			|				Day			  |    Alarm 1 Day 1–7 /Date 1–31
-		0Bh		A2M2		|      10 Minutes				|				Minutes		  |	   Alarm 2 Minutes 00–59
-		0Ch		A2M3		12/24	   AM/PM/20 Hour|10 Hour|				Hour		  |	   Alarm 2 Hours 1–12 + AM/PM 00–23
-		0Dh		A2M4		DY/DT		|	10 Date			|				Day			  |    Alarm 2 Day 1–7/Date 1–31
-		0Eh		EOSC		BBSQW		CONV		RS2			RS1		INTCN	A2IE	A1IE   Controlregister
-		0Fh		OSF			0			0			0		EN32kHz		BSY		A2F		A1F	   Control/Status —
-		10h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA   Aging Offset —
-		11h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA   MSB of Temp —
-		12h		DATA		DATA		0			0			0		0		0		0	   LSB of Temp —
+REGISTERS
+ADDRESS		BIT 7		BIT	6		BIT 5		BIT 4	 BIT 3	 BIT 2	 BIT 1	 BIT 0	 
+	00h			0		|			10 Seconds		    |			Seconds           |    
+	01h			0		|			10 Minutes		    |			Minutes			  |    
+	02h			0		12/24	  AM/PM/20 Hour|10 Hour|Hour						  |   
+	03h			0		0				0		 0			0	|		Day			  |	   
+	04h			0		0			|	10 Date		    |				Date          |    
+	05h	   Century		0				0      10 Month |				Month         |
+	06h   |    			10 Year						    |				Year		  |
+	07h		A1M1		|			10 Seconds			|				Seconds		  |
+	08h		A1M2		|			10 Minutes			|				Minutes		  |
+	09h		A1M3		12/24	   AM/PM/20 Hour|10 Hour|			    Hour		  |
+	0Ah		A1M4		DY/DT		|	10 Date			|				Day			  |
+	0Bh		A2M2		|      10 Minutes				|				Minutes		  |
+	0Ch		A2M3		12/24	   AM/PM/20 Hour|10 Hour|				Hour		  |
+	0Dh		A2M4		DY/DT		|	10 Date			|				Day			  |
+	0Eh		EOSC		BBSQW		CONV		RS2			RS1		INTCN	A2IE	A1IE
+	0Fh		OSF			0			0			0		EN32kHz		BSY		A2F		A1F	
+	10h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA
+	11h		SIGN		DATA		DATA		DATA		DATA	DATA	DATA	DATA
+	12h		DATA		DATA		0			0			0		0		0		0	
